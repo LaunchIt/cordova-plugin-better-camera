@@ -12,3 +12,4 @@ Thumbs.db
 *.swp
 *.user
 /.idea/*
+/src/cordova-plugin-better-camera.iml
