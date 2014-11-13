@@ -107,12 +107,12 @@ public class NativeCameraLauncher extends CordovaPlugin {
         Intent intent = new Intent(this.cordova.getActivity().getApplicationContext(), CameraActivity.class);
         mPhotoFile = createCaptureFile();
         mImageUri = Uri.fromFile(mPhotoFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, this.mImageUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
         cordova.startActivityForResult((CordovaPlugin) this, intent, 1);
     }
 
     private File createCaptureFile() {
-        File oldFile = new File(getTempDirectoryPath(this.cordova.getActivity().getApplicationContext()), "Pic-" + this.mDate + ".jpg");
+        File oldFile = new File(getTempDirectoryPath(this.cordova.getActivity().getApplicationContext()), "Pic-" + mDate + ".jpg");
         if (oldFile.exists()) {
             oldFile.delete();
         }
@@ -125,8 +125,7 @@ public class NativeCameraLauncher extends CordovaPlugin {
                 + c.get(Calendar.MINUTE)
                 + c.get(Calendar.SECOND);
 
-        File photo = new File(getTempDirectoryPath(this.cordova.getActivity().getApplicationContext()), "Pic-" + this.mDate + ".jpg");
-        return photo;
+        return new File(getTempDirectoryPath(this.cordova.getActivity().getApplicationContext()), "Pic-" + mDate + ".jpg");
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -137,15 +136,14 @@ public class NativeCameraLauncher extends CordovaPlugin {
                 // Create an ExifHelper to save the exif data that is lost
                 // during compression
                 ExifHelper exif = new ExifHelper();
-                exif.createInFile(getTempDirectoryPath(this.cordova.getActivity().getApplicationContext()) + "/Pic-" + this.mDate + ".jpg");
+                exif.createInFile(getTempDirectoryPath(this.cordova.getActivity().getApplicationContext()) + "/Pic-" + mDate + ".jpg");
                 exif.readExifData();
                 rotate = exif.getOrientation();
 
                 // Read in bitmap of captured image
                 Bitmap bitmap;
                 try {
-                    bitmap = android.provider.MediaStore.Images.Media.getBitmap(
-                            this.cordova.getActivity().getContentResolver(), mImageUri);
+                    bitmap = android.provider.MediaStore.Images.Media.getBitmap(this.cordova.getActivity().getContentResolver(), mImageUri);
                 } catch (FileNotFoundException e) {
                     Uri uri = intent.getData();
                     android.content.ContentResolver resolver = this.cordova.getActivity().getContentResolver();
