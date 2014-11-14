@@ -9,7 +9,7 @@ The squared camera code is based on [https://github.com/charlesbedrosian/Instant
 ## Usage
 We kept the original interface as it is, but we add a couple params:
 
-#### Android system camera
+#### Android System Camera
 
 ```javascript
 navigator.camera.getPicture(onSuccess, onFail, {
@@ -18,7 +18,7 @@ navigator.camera.getPicture(onSuccess, onFail, {
             });
 ```
 
-#### Integrate Camera Activity
+#### Integrated Camera Activity
 ```javascript
 navigator.camera.getPicture(onSuccess, onFail, {
                 quality: 50,
@@ -27,7 +27,7 @@ navigator.camera.getPicture(onSuccess, onFail, {
             });
 ```
 
-#### Integrate Squared Camera Activity
+#### Integrated Squared Camera Activity
 ```javascript
 navigator.camera.getPicture(onSuccess, onFail, {
                 quality: 50,
