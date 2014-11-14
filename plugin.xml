@@ -83,7 +83,13 @@
                     android:screenOrientation="portrait"
                     android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             </activity>
+
+            <activity
+                    android:label="squarecamera"
+                    android:name="org.apache.cordova.camera.SquareCameraActivity">
+            </activity>
         </config-file>
+
 
         <source-file src="src/android/CameraLauncher.java" target-dir="src/org/apache/cordova/camera"/>
         <source-file src="src/android/FileHelper.java" target-dir="src/org/apache/cordova/camera"/>
@@ -98,6 +104,27 @@
         <source-file src="res/btn_flash_no.png" target-dir="res/drawable"/>
         <source-file src="res/btn_flash_auto.png" target-dir="res/drawable"/>
         <source-file src="res/viewfinder.png" target-dir="res/drawable"/>
+
+
+        <source-file src="res/layout/activity_camera.xml" target-dir="res/layout"/>
+
+        <source-file src="res/values/camera_colors.xml" target-dir="res/values"/>
+        <source-file src="res/values/camera_strings.xml" target-dir="res/values"/>
+        <source-file src="res/values/camera_styles.xml" target-dir="res/values"/>
+
+        <source-file src="res/drawable/action_bar_glyph_flash_auto.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/action_bar_glyph_flash_on.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/action_bar_glyph_flash_off.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/ic_action_camera.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/action_bar_glyph_switch_camera.png" target-dir="res/drawable"/>
+
+        <source-file src="src/android/CameraFragment.java" target-dir="src/org/apache/cordova/camera"/>
+        <source-file src="src/android/CameraFragmentListener.java" target-dir="src/org/apache/cordova/camera"/>
+        <source-file src="src/android/CameraOrientationListener.java" target-dir="src/org/apache/cordova/camera"/>
+        <source-file src="src/android/CameraOverlayView.java" target-dir="src/org/apache/cordova/camera"/>
+        <source-file src="src/android/CameraPreview.java" target-dir="src/org/apache/cordova/camera"/>
+        <source-file src="src/android/SquareCameraActivity.java" target-dir="src/org/apache/cordova/camera"/>
+
 
         <js-module src="www/CameraPopoverHandle.js" name="CameraPopoverHandle">
             <clobbers target="CameraPopoverHandle"/>

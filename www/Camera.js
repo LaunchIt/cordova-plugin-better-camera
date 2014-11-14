@@ -60,11 +60,12 @@ cameraExport.getPicture = function(successCallback, errorCallback, options) {
     var cameraDirection = getValue(options.cameraDirection, Camera.Direction.BACK);
 
     var foreground = getValue(options.foreground, false);
+    var squared = getValue(options.squared, false);
 
     var args = [quality, destinationType, sourceType, targetWidth, targetHeight, encodingType,
-                mediaType, allowEdit, correctOrientation, saveToPhotoAlbum, popoverOptions, cameraDirection];
+                mediaType, allowEdit, correctOrientation, saveToPhotoAlbum, popoverOptions, cameraDirection, squared];
 
-    if (foreground) {
+    if (foreground || squared) {
         exec(successCallback, errorCallback, "ForegroundCamera", "takePicture", args);
         return new CameraPopoverHandle();
     } else {
