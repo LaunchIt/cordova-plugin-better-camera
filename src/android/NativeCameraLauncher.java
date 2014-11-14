@@ -66,6 +66,8 @@ public class NativeCameraLauncher extends CordovaPlugin {
 
     private String mDate = null;
 
+    private boolean isSquared = false;
+
     public NativeCameraLauncher() {
     }
 
@@ -86,6 +88,7 @@ public class NativeCameraLauncher extends CordovaPlugin {
                 mTargetHeight = args.getInt(4);
                 mTargetWidth = args.getInt(3);
                 mQuality = args.getInt(0);
+                isSquared = args.getBoolean(12);
                 takePicture();
                 PluginResult r = new PluginResult(PluginResult.Status.NO_RESULT);
                 r.setKeepCallback(true);
@@ -104,7 +107,12 @@ public class NativeCameraLauncher extends CordovaPlugin {
 
     public void takePicture() {
         // Save the number of images currently on disk for later
-        Intent intent = new Intent(this.cordova.getActivity().getApplicationContext(), SquareCameraActivity.class);
+        Intent intent = null;
+        if (isSquared){
+            intent = new Intent(this.cordova.getActivity().getApplicationContext(), SquareCameraActivity.class);
+        } else {
+            intent = new Intent(this.cordova.getActivity().getApplicationContext(), CameraActivity.class);
+        }
         mPhotoFile = createCaptureFile();
         mImageUri = Uri.fromFile(mPhotoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
