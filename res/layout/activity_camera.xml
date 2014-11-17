@@ -4,9 +4,9 @@
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
               android:orientation="vertical">
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 android:layout_width="fill_parent"
-                 android:layout_height="fill_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
         <fragment
                 android:id="@+id/camera_fragment"
                 android:name="org.apache.cordova.camera.CameraFragment"
@@ -17,29 +17,38 @@
                 android:id="@+id/camera_overlay"
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:contentDescription="@string/content_description_take_picture"
+
+        <Button
+                android:id="@+id/flipCamera"
+                android:layout_height="37dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_flip"
+                android:layout_width="53dp"
+                android:onClick="swapCamera"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"/>
+
+        <Button
                 android:onClick="takePicture"
-                android:src="@drawable/ic_action_camera"
-                android:layout_gravity="center_horizontal|bottom"/>
+                android:id="@+id/captureButton"
+                android:layout_height="66dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_shot"
+                android:layout_width="66dp"
+                android:layout_marginBottom="20dp"/>
+
         <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:contentDescription="@string/content_description_swap_flash"
                 android:onClick="swapFlash"
-                android:src="@drawable/action_bar_glyph_flash_auto"
-                android:layout_gravity="left|top"
-                android:id="@+id/flash_mode_button"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/content_description_swap_camera"
-                android:onClick="swapCamera"
-                android:src="@drawable/action_bar_glyph_switch_camera"
-                android:layout_gravity="right|top"/>
-    </FrameLayout>
+                android:id="@+id/flash_mode_button"
+                android:layout_height="37dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_flash_no"
+                android:layout_width="38dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="20dp"/>
+    </RelativeLayout>
 
 </LinearLayout>
