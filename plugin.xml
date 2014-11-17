@@ -100,12 +100,12 @@
         <source-file src="src/android/CameraActivity.java" target-dir="src/org/apache/cordova/camera"/>
         <source-file src="src/android/NativeCameraLauncher.java" target-dir="src/org/apache/cordova/camera"/>
         <source-file src="src/android/nativecameraplugin.xml" target-dir="res/layout"/>
-        <source-file src="res/btn_shot.png" target-dir="res/drawable"/>
-        <source-file src="res/btn_flip.png" target-dir="res/drawable"/>
-        <source-file src="res/btn_flash_on.png" target-dir="res/drawable"/>
-        <source-file src="res/btn_flash_no.png" target-dir="res/drawable"/>
-        <source-file src="res/btn_flash_auto.png" target-dir="res/drawable"/>
-        <source-file src="res/viewfinder.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/btn_shot.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/btn_flip.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/btn_flash_on.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/btn_flash_no.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/btn_flash_auto.png" target-dir="res/drawable"/>
+        <source-file src="res/drawable/viewfinder.png" target-dir="res/drawable"/>
 
 
         <source-file src="res/layout/activity_camera.xml" target-dir="res/layout"/>
@@ -113,12 +113,6 @@
         <source-file src="res/values/camera_colors.xml" target-dir="res/values"/>
         <source-file src="res/values/camera_strings.xml" target-dir="res/values"/>
         <source-file src="res/values/camera_styles.xml" target-dir="res/values"/>
-
-        <source-file src="res/drawable/action_bar_glyph_flash_auto.png" target-dir="res/drawable"/>
-        <source-file src="res/drawable/action_bar_glyph_flash_on.png" target-dir="res/drawable"/>
-        <source-file src="res/drawable/action_bar_glyph_flash_off.png" target-dir="res/drawable"/>
-        <source-file src="res/drawable/ic_action_camera.png" target-dir="res/drawable"/>
-        <source-file src="res/drawable/action_bar_glyph_switch_camera.png" target-dir="res/drawable"/>
 
         <source-file src="src/android/CameraFragment.java" target-dir="src/org/apache/cordova/camera"/>
         <source-file src="src/android/CameraFragmentListener.java" target-dir="src/org/apache/cordova/camera"/>

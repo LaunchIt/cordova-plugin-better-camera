@@ -318,19 +318,20 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
 
     private void setFlashButtonState() {
         List<String> flashModes = mCamera.getParameters().getSupportedFlashModes();
-        ImageButton flashModeButton = (ImageButton) getActivity().findViewById(getResources().getIdentifier("flash_mode_button", "id", getActivity().getPackageName()));
+        ImageButton flashModeButton = (ImageButton) getActivity()
+                .findViewById(getResources().getIdentifier("flash_mode_button", "id", getActivity().getPackageName()));
         if (null == flashModes || flashModes.size() == 0) {
             flashModeButton.setVisibility(View.INVISIBLE);
         } else {
             flashModeButton.setVisibility(View.VISIBLE);
             if (mCamera.getParameters().getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
-                flashModeButton.setImageResource(getResources().getIdentifier("action_bar_glyph_flash_off", "id", getActivity().getPackageName()));
+                flashModeButton.setBackgroundResource(getResources().getIdentifier("@drawable/btn_flash_no", null, getActivity().getPackageName()));
             }
             if (mCamera.getParameters().getFlashMode().equals(Camera.Parameters.FLASH_MODE_ON)) {
-                flashModeButton.setImageResource(getResources().getIdentifier("action_bar_glyph_flash_on", "id", getActivity().getPackageName()));
+                flashModeButton.setBackgroundResource(getResources().getIdentifier("@drawable/btn_flash_on", null, getActivity().getPackageName()));
             }
             if (mCamera.getParameters().getFlashMode().equals(Camera.Parameters.FLASH_MODE_AUTO)) {
-                flashModeButton.setImageResource(getResources().getIdentifier("action_bar_glyph_flash_auto", "id", getActivity().getPackageName()));
+                flashModeButton.setBackgroundResource(getResources().getIdentifier("@drawable/btn_flash_auto", null, getActivity().getPackageName()));
             }
         }
     }
