@@ -78,15 +78,17 @@
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity
-                    android:label="nativecameraplugin"
+                    android:label="Take a picture!"
                     android:name="org.apache.cordova.camera.CameraActivity"
                     android:screenOrientation="portrait"
                     android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             </activity>
 
             <activity
-                    android:label="squarecamera"
-                    android:name="org.apache.cordova.camera.SquareCameraActivity">
+                    android:label="Take a picture!"
+                    android:name="org.apache.cordova.camera.SquareCameraActivity"
+                    android:screenOrientation="portrait"
+                    android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             </activity>
         </config-file>
 
