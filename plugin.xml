@@ -99,7 +99,7 @@
 
         <source-file src="src/android/CameraActivity.java" target-dir="src/org/apache/cordova/camera"/>
         <source-file src="src/android/NativeCameraLauncher.java" target-dir="src/org/apache/cordova/camera"/>
-        <source-file src="src/android/nativecameraplugin.xml" target-dir="res/layout"/>
+        <source-file src="res/layout/nativecameraplugin.xml" target-dir="res/layout"/>
         <source-file src="res/drawable/btn_shot.png" target-dir="res/drawable"/>
         <source-file src="res/drawable/btn_flip.png" target-dir="res/drawable"/>
         <source-file src="res/drawable/btn_flash_on.png" target-dir="res/drawable"/>
