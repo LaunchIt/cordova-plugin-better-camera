@@ -50,6 +50,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.cordova.camera.Utils;
 
 public class CameraActivity extends Activity implements SensorEventListener {
 
@@ -96,11 +97,15 @@ public class CameraActivity extends Activity implements SensorEventListener {
     private int mScreenHeight;
 
     private float mViewFinderHalfPx;
+    
+    private float mDensity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mDensity = getResources().getDisplayMetrics().density;
+        
         //setContentView(R.layout.activity_main);
         setContentView(getResources().getIdentifier("nativecameraplugin", "layout", getPackageName()));
 
@@ -113,7 +118,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
         final int imgFlashNo = getResources().getIdentifier("@drawable/btn_flash_no", null, getPackageName());
         final int imgFlashAuto = getResources().getIdentifier("@drawable/btn_flash_auto", null, getPackageName());
         final int imgFlashOn = getResources().getIdentifier("@drawable/btn_flash_on", null, getPackageName());
-        mViewFinderHalfPx = pxFromDp(72) / 2;
+        mViewFinderHalfPx = Utils.pxFromDp(mDensity, 72) / 2;
 
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         if (sm.getSensorList(Sensor.TYPE_ACCELEROMETER).size() != 0) {
@@ -177,8 +182,8 @@ public class CameraActivity extends Activity implements SensorEventListener {
 
                     if (event.getY() - mViewFinderHalfPx < 0) {
                         viewfinder.setY(0);
-                    } else if (event.getY() + mViewFinderHalfPx > mScreenHeight - pxFromDp(125)) {
-                        viewfinder.setY((mScreenHeight - pxFromDp(125)) - mViewFinderHalfPx * 2);
+                    } else if (event.getY() + mViewFinderHalfPx > mScreenHeight - Utils.pxFromDp(mDensity, 125)) {
+                        viewfinder.setY((mScreenHeight - Utils.pxFromDp(mDensity, 125)) - mViewFinderHalfPx * 2);
                     } else {
                         viewfinder.setY(event.getY() - mViewFinderHalfPx);
                     }
@@ -353,10 +358,6 @@ public class CameraActivity extends Activity implements SensorEventListener {
             initPreview(mPreview.getHeight());
             startPreview();
         }
-    }
-
-    private float pxFromDp(float dp) {
-        return dp * CameraActivity.this.getResources().getDisplayMetrics().density;
     }
 
     void restartPreview(int isFront) {
