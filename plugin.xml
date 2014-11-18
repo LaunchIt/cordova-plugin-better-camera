@@ -107,7 +107,6 @@
         <source-file src="res/drawable/btn_flash_auto.png" target-dir="res/drawable"/>
         <source-file src="res/drawable/viewfinder.png" target-dir="res/drawable"/>
 
-
         <source-file src="res/layout/activity_camera.xml" target-dir="res/layout"/>
 
         <source-file src="res/values/camera_colors.xml" target-dir="res/values"/>
@@ -122,6 +121,7 @@
         <source-file src="src/android/SquareCameraActivity.java" target-dir="src/org/apache/cordova/camera"/>
 
         <source-file src="src/android/Utils.java" target-dir="src/org/apache/cordova/camera"/>
+        <source-file src="src/android/FocusButton.java" target-dir="src/org/apache/cordova/camera"/>
 
 
         <js-module src="www/CameraPopoverHandle.js" name="CameraPopoverHandle">

@@ -335,4 +335,8 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
             }
         }
     }
+
+    public Camera getCamera() {
+        return mCamera;
+    }
 }

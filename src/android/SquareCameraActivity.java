@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.net.Uri;
+import android.view.Display;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -21,6 +22,11 @@ import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import android.hardware.Camera;
+import android.widget.ImageView;
+
+import android.widget.RelativeLayout;
 
 /**
  * Activity displaying the camera and mustache preview.
@@ -35,6 +41,10 @@ public class SquareCameraActivity extends Activity implements CameraFragmentList
 
     private String mDate = null;
 
+    private int mScreenWidth;
+
+    private int mScreenHeight;
+
     /**
      * On activity getting created.
      */
@@ -43,6 +53,22 @@ public class SquareCameraActivity extends Activity implements CameraFragmentList
         super.onCreate(savedInstanceState);
 
         setContentView(getResources().getIdentifier("activity_camera", "layout", getPackageName()));
+
+        Display display = getWindowManager().getDefaultDisplay();
+        // Necessary to use deprecated methods for Android 2.x support
+        mScreenWidth = display.getWidth();
+        mScreenHeight = display.getHeight();
+
+        float density = getResources().getDisplayMetrics().density;
+        final ImageView viewfinder = (ImageView) findViewById(getResources().getIdentifier("viewfinder", "id", getPackageName()));
+        final RelativeLayout focusButton = (RelativeLayout) findViewById(getResources().getIdentifier("viewfinderArea", "id", getPackageName()));
+
+        CameraFragment fragment = (CameraFragment) getFragmentManager()
+                .findFragmentById(getResources().getIdentifier("camera_fragment", "id", getPackageName()));
+
+        Camera camera = fragment.getCamera();
+        focusButton.setOnTouchListener(new FocusButton(mScreenWidth, mScreenHeight, density, camera, viewfinder));
+
     }
 
     /**
@@ -50,7 +76,8 @@ public class SquareCameraActivity extends Activity implements CameraFragmentList
      */
     @Override
     public void onCameraError() {
-        Toast.makeText(this, getString(getResources().getIdentifier("toat_error_camera_preview", "string", getPackageName())), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(getResources().getIdentifier("toat_error_camera_preview", "string", getPackageName())), Toast.LENGTH_SHORT)
+                .show();
         finish();
     }
 
@@ -59,17 +86,20 @@ public class SquareCameraActivity extends Activity implements CameraFragmentList
      */
     public void takePicture(View view) {
         view.setEnabled(false);
-        CameraFragment fragment = (CameraFragment) getFragmentManager().findFragmentById(getResources().getIdentifier("camera_fragment", "id", getPackageName()));
+        CameraFragment fragment = (CameraFragment) getFragmentManager().findFragmentById(
+                getResources().getIdentifier("camera_fragment", "id", getPackageName()));
         fragment.takePicture();
     }
 
     public void swapCamera(View view) {
-        CameraFragment fragment = (CameraFragment) getFragmentManager().findFragmentById(getResources().getIdentifier("camera_fragment", "id", getPackageName()));
+        CameraFragment fragment = (CameraFragment) getFragmentManager().findFragmentById(
+                getResources().getIdentifier("camera_fragment", "id", getPackageName()));
         fragment.swapCamera();
     }
 
     public void swapFlash(View view) {
-        CameraFragment fragment = (CameraFragment) getFragmentManager().findFragmentById(getResources().getIdentifier("camera_fragment", "id", getPackageName()));
+        CameraFragment fragment = (CameraFragment) getFragmentManager().findFragmentById(
+                getResources().getIdentifier("camera_fragment", "id", getPackageName()));
         fragment.swapFlash();
     }
 

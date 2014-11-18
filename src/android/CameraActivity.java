@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cordova.camera.Utils;
+import org.apache.cordova.camera.FocusButton;
 
 public class CameraActivity extends Activity implements SensorEventListener {
 
@@ -97,7 +98,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
     private int mScreenHeight;
 
     private float mViewFinderHalfPx;
-    
+
     private float mDensity;
 
     @Override
@@ -105,7 +106,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
 
         mDensity = getResources().getDisplayMetrics().density;
-        
+
         //setContentView(R.layout.activity_main);
         setContentView(getResources().getIdentifier("nativecameraplugin", "layout", getPackageName()));
 
@@ -149,57 +150,7 @@ public class CameraActivity extends Activity implements SensorEventListener {
         mScreenWidth = display.getWidth();
         mScreenHeight = display.getHeight();
 
-        focusButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                float x = 0;
-                float y = 0;
-                Rect focusRect;
-                y = (((event.getX() * 2000) / mScreenWidth) - 1000) * -1;
-                x = (((event.getY() * 2000) / mScreenHeight) - 1000);
-
-                if ((int) x - 100 > -1000 && (int) x + 100 < 1000 && (int) y - 100 > -1000 && (int) y + 100 < 1000) {
-                    focusRect = new Rect((int) x - 100, (int) y - 100, (int) x + 100, (int) y + 100);
-                } else {
-                    focusRect = new Rect(-100, -100, 100, 100);
-                }
-
-                if (mCamera == null) {
-                    return true;
-                }
-
-                Parameters parameters = mCamera.getParameters();
-
-                if (parameters.getMaxNumFocusAreas() > 0) {
-
-                    if (event.getX() - mViewFinderHalfPx < 0) {
-                        viewfinder.setX(0);
-                    } else if (event.getX() + mViewFinderHalfPx > mScreenWidth) {
-                        viewfinder.setX(mScreenWidth - mViewFinderHalfPx * 2);
-                    } else {
-                        viewfinder.setX(event.getX() - mViewFinderHalfPx);
-                    }
-
-                    if (event.getY() - mViewFinderHalfPx < 0) {
-                        viewfinder.setY(0);
-                    } else if (event.getY() + mViewFinderHalfPx > mScreenHeight - Utils.pxFromDp(mDensity, 125)) {
-                        viewfinder.setY((mScreenHeight - Utils.pxFromDp(mDensity, 125)) - mViewFinderHalfPx * 2);
-                    } else {
-                        viewfinder.setY(event.getY() - mViewFinderHalfPx);
-                    }
-
-                    List<Camera.Area> focusArea = new ArrayList<Camera.Area>();
-                    focusArea.add(new Camera.Area(focusRect, 750));
-                    parameters.setFocusAreas(focusArea);
-                    if (parameters.getMaxNumMeteringAreas() > 0) {
-                        parameters.setMeteringAreas(focusArea);
-                    }
-
-                    mCamera.setParameters(parameters);
-                }
-                return true;
-            }
-        });
+        focusButton.setOnTouchListener(new FocusButton(mScreenWidth, mScreenHeight, mDensity, mCamera, viewfinder));
 
         if (isFrontCamera) {
             flipCamera.setOnClickListener(new View.OnClickListener() {
